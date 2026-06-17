@@ -209,7 +209,7 @@
 // ══════════════════════════════════════════
 const PRODUCTS = [
   // Vitamins
-  {id:'vitA',   name:'Vitamin A 500kIU',  cat:'Vitamins',     unit:'kg',  q:'Vitamin A acetate 500000 IU/g feed grade China export price today June 2026'},
+  {id:'vitA',   name:'Vitamin A 1000kIU', cat:'Vitamins',     unit:'kg',  q:'Vitamin A acetate 1000000 IU/g feed grade China export price today June 2026'},
   {id:'vitD3',  name:'Vitamin D3 500kIU', cat:'Vitamins',     unit:'kg',  q:'Vitamin D3 500000 IU/g cholecalciferol feed grade China export price today June 2026'},
   {id:'vitE',   name:'Vitamin E 50%',     cat:'Vitamins',     unit:'kg',  q:'Vitamin E 50% powder dl-alpha tocopheryl acetate feed grade China export price today June 2026'},
   {id:'vitC',   name:'Vitamin C 97%',     cat:'Vitamins',     unit:'kg',  q:'Vitamin C ascorbic acid 97% feed grade China export price today June 2026'},
@@ -255,6 +255,12 @@ const LINKS = [
   {name:'Freightos', url:'https://www.freightos.com/', desc:'Container freight rates China'},
   {name:'Xeneta', url:'https://www.xeneta.com/', desc:'Ocean freight benchmarking'},
   {name:'Sulfur Price', url:'https://www.chemanalyst.com/Pricing-data/sulphur-35', desc:'Sulfur market prices'},
+  {name:'Effamall', url:'https://www.effamall.com/article', desc:'Daily feed additive market reports'},
+  {name:'Effamall Prices', url:'https://www.effamall.com/', desc:'China feed ingredient prices & suppliers'},
+  {name:'Vega Daily Report', url:'https://www.vegapharma.com/index/china/index.html', desc:'Vega Group daily vitamin & amino acid market news'},
+  {name:'Vega LinkedIn', url:'https://www.linkedin.com/company/vega-pharma-limited/posts/?feedView=all', desc:'Vega Group LinkedIn posts'},
+  {name:'Vegamax LinkedIn', url:'https://www.linkedin.com/company/vegamax', desc:'Vegamax daily feed additive reports'},
+  {name:'NHU LinkedIn', url:'https://www.linkedin.com/company/zhejiang-nhu-co-ltd/', desc:'NHU vitamins manufacturer'},
 ];
 
 // ══════════════════════════════════════════
@@ -413,19 +419,21 @@ async function fetchNews() {
 
   try {
     const text = await callClaude(
-      `Search for latest news from June 2026 relevant to a Turkish feed additive manufacturer (Birsen Kimya) importing from China.
+      `You are a market analyst for a Turkish feed additive manufacturer importing vitamins, amino acids and minerals from China.
 
-Search these topics:
-1. Feed vitamin prices: Vitamin A, D3, E 50%, C, B1, B2, B12, K3 - China export prices June 2026
-2. Amino acids: L-Lysine sulfate, L-Threonine, DL-Methionine prices June 2026
-3. Minerals: DCP, MCP, Choline Chloride 60%, Ferrous Sulfate, Manganese Sulfate
-4. Sulfur price and supply June 2026 (affects vitamin/amino acid production)
-5. Container freight rates China to Turkey/Izmir June 2026 (20ft, 40ft FCL)
-6. LinkedIn posts from Vega Group, NHU, BASF, Adisseo, DSM-Firmenich about feed additive prices
-7. Chinese export policies, factory shutdowns, or supply disruptions
+Search these sources and topics for June 2026 news:
+- https://www.vegapharma.com/index/china/index.html (Vega Daily - daily vitamin & amino acid market report)
+- https://www.effamall.com/article (Effamall daily feed market reports)
+- Feed vitamin prices: Vitamin A, D3, E 50%, C, B-vitamins, K3 from China
+- Amino acids: L-Lysine, L-Threonine, DL-Methionine prices
+- Minerals: DCP, MCP, Choline Chloride, Ferrous Sulfate, Manganese Sulfate, Sulfur
+- Container freight China to Turkey/Izmir (20ft, 40ft FCL rates)
+- News from Vega Group, NHU, BASF, Adisseo about feed additive supply
 
-Return ONLY a JSON array (no other text), max 10 items, most recent first:
-[{"title":"...","summary":"2 sentences max, include specific prices if found","relevance":"affected products or freight","date":"approx date June 2026"}]`
+Return ONLY valid JSON array, no markdown, no extra text:
+[{"title":"short title","summary":"1-2 sentences with specific data","relevance":"products affected","date":"date"}]
+
+Maximum 10 items. Start with [ and end with ]`
     );
     const arr = parseJSON(text);
     if (Array.isArray(arr)) { newsData = arr; newsStatus = 'done'; }
