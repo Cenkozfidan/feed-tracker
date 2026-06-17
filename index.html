@@ -209,26 +209,30 @@
 // ══════════════════════════════════════════
 const PRODUCTS = [
   // Vitamins
-  {id:'vitA',   name:'Vitamin A',         cat:'Vitamins',     unit:'kg',  q:'Vitamin A acetate feed grade export price China 2026'},
-  {id:'vitD3',  name:'Vitamin D3',        cat:'Vitamins',     unit:'kg',  q:'Vitamin D3 cholecalciferol feed grade export price China 2026'},
-  {id:'vitE',   name:'Vitamin E',         cat:'Vitamins',     unit:'kg',  q:'Vitamin E tocopherol feed grade export price China 2026'},
-  {id:'vitC',   name:'Vitamin C',         cat:'Vitamins',     unit:'kg',  q:'Vitamin C ascorbic acid feed grade export price China 2026'},
-  {id:'vitB1',  name:'Vitamin B1',        cat:'Vitamins',     unit:'kg',  q:'Thiamine mononitrate feed grade export price China 2026'},
-  {id:'vitB2',  name:'Vitamin B2',        cat:'Vitamins',     unit:'kg',  q:'Riboflavin feed grade export price China 2026'},
-  {id:'vitB12', name:'Vitamin B12',       cat:'Vitamins',     unit:'kg',  q:'Cyanocobalamin Vitamin B12 feed grade price China 2026'},
-  {id:'vitK3',  name:'Vitamin K3',        cat:'Vitamins',     unit:'kg',  q:'Menadione MSB Vitamin K3 feed grade price China 2026'},
+  {id:'vitA',   name:'Vitamin A 500kIU',  cat:'Vitamins',     unit:'kg',  q:'Vitamin A acetate 500000 IU/g feed grade China export price today June 2026'},
+  {id:'vitD3',  name:'Vitamin D3 500kIU', cat:'Vitamins',     unit:'kg',  q:'Vitamin D3 500000 IU/g cholecalciferol feed grade China export price today June 2026'},
+  {id:'vitE',   name:'Vitamin E 50%',     cat:'Vitamins',     unit:'kg',  q:'Vitamin E 50% powder dl-alpha tocopheryl acetate feed grade China export price today June 2026'},
+  {id:'vitC',   name:'Vitamin C 97%',     cat:'Vitamins',     unit:'kg',  q:'Vitamin C ascorbic acid 97% feed grade China export price today June 2026'},
+  {id:'vitB1',  name:'Vitamin B1 98%',    cat:'Vitamins',     unit:'kg',  q:'Thiamine mononitrate 98% feed grade China export price today June 2026'},
+  {id:'vitB2',  name:'Vitamin B2 80%',    cat:'Vitamins',     unit:'kg',  q:'Riboflavin 80% feed grade China export price today June 2026'},
+  {id:'vitB12', name:'Vitamin B12 1%',    cat:'Vitamins',     unit:'kg',  q:'Cyanocobalamin Vitamin B12 1% feed grade China export price today June 2026'},
+  {id:'vitK3',  name:'Vitamin K3 MSB',    cat:'Vitamins',     unit:'kg',  q:'Menadione sodium bisulfite MSB Vitamin K3 feed grade China export price today June 2026'},
   // Amino Acids
-  {id:'lysine', name:'L-Lysine Sulfate',  cat:'Amino Acids',  unit:'MT',  q:'L-Lysine sulfate 70% feed grade export price China 2026'},
-  {id:'threo',  name:'L-Threonine',       cat:'Amino Acids',  unit:'MT',  q:'L-Threonine 98.5% feed grade export price China 2026'},
-  {id:'methi',  name:'DL-Methionine',     cat:'Amino Acids',  unit:'MT',  q:'DL-Methionine 99% feed grade export price China 2026'},
+  {id:'lysine', name:'L-Lysine Sulfate 70%', cat:'Amino Acids', unit:'MT', q:'L-Lysine sulfate 70% feed grade China export price today June 2026'},
+  {id:'threo',  name:'L-Threonine 98.5%', cat:'Amino Acids',  unit:'MT',  q:'L-Threonine 98.5% feed grade China export price today June 2026'},
+  {id:'methi',  name:'DL-Methionine 99%', cat:'Amino Acids',  unit:'MT',  q:'DL-Methionine 99% feed grade China export price today June 2026'},
   // Minerals
-  {id:'mnSO4',  name:'Manganese Sulfate', cat:'Minerals',     unit:'MT',  q:'Manganese sulfate monohydrate feed grade price China 2026'},
-  {id:'feSO4',  name:'Ferrous Sulfate',   cat:'Minerals',     unit:'MT',  q:'Ferrous sulfate monohydrate feed grade price China 2026'},
-  {id:'dcp',    name:'DCP',              cat:'Minerals',     unit:'MT',  q:'Dicalcium phosphate DCP feed grade price China 2026'},
-  {id:'mcp',    name:'MCP',              cat:'Minerals',     unit:'MT',  q:'Monocalcium phosphate MCP feed grade price China 2026'},
+  {id:'mnSO4',  name:'Manganese Sulfate', cat:'Minerals',     unit:'MT',  q:'Manganese sulfate monohydrate 31.8% Mn feed grade China price today June 2026'},
+  {id:'feSO4',  name:'Ferrous Sulfate',   cat:'Minerals',     unit:'MT',  q:'Ferrous sulfate monohydrate 30% Fe feed grade China price today June 2026'},
+  {id:'dcp',    name:'DCP 18%',           cat:'Minerals',     unit:'MT',  q:'Dicalcium phosphate DCP 18% P feed grade China price today June 2026'},
+  {id:'mcp',    name:'MCP 22%',           cat:'Minerals',     unit:'MT',  q:'Monocalcium phosphate MCP 22% P feed grade China price today June 2026'},
   // Other
-  {id:'choline',name:'Choline Chloride',  cat:'Other',        unit:'MT',  q:'Choline chloride 60% 70% feed grade price China 2026'},
-  {id:'soybean',name:'Soybean Meal',      cat:'Other',        unit:'MT',  q:'Soybean meal 46% protein price international market 2026'},
+  {id:'choline',name:'Choline Chloride 60%', cat:'Other',     unit:'MT',  q:'Choline chloride 60% corn cob feed grade China price today June 2026'},
+  {id:'soybean',name:'Soybean Meal 46%',  cat:'Other',        unit:'MT',  q:'Soybean meal 46% protein Argentina Brazil price today June 2026'},
+  // Freight & Materials
+  {id:'sulfur',  name:'Sulfur',           cat:'Minerals',     unit:'MT',  q:'Sulfur price China export today June 2026 USD per ton'},
+  {id:'fcl20',   name:'FCL 20ft China→Izmir', cat:'Freight',  unit:'box', q:'Container freight rate China to Izmir Turkey 20ft FCL today June 2026 USD'},
+  {id:'fcl40',   name:'FCL 40ft China→Izmir', cat:'Freight',  unit:'box', q:'Container freight rate China to Izmir Turkey 40ft FCL today June 2026 USD'},
 ];
 
 const MOBAOBUY = {
@@ -236,6 +240,7 @@ const MOBAOBUY = {
   'Amino Acids': 'https://www.mobaobuy.com/siyibuy/indexPage?shopSkuName=%E6%B0%A8%E5%9F%BA%E9%85%B8',
   'Minerals':    'https://www.mobaobuy.com/siyibuy/indexPage?shopSkuName=%E7%9F%BF%E7%89%A9%E5%85%83%E7%B4%A0%E5%8F%8A%E5%85%B6%E7%BB%9C%EF%BC%88%E8%9E%AF%EF%BC%89%E5%90%88%E7%89%A9',
   'Other':       'https://www.mobaobuy.com/siyibuy/indexPage',
+  'Freight':     'https://www.freightos.com/freight-resources/china-freight/',
 };
 
 const LINKS = [
@@ -245,6 +250,11 @@ const LINKS = [
   {name:'Feedinfo',      url:'https://feedinfo.com/',              desc:'Global feed industry news'},
   {name:'EU Feed Register', url:'https://ec.europa.eu/food/safety/animal-feed/feed-additives/eu-register_en', desc:'EU approved additives list'},
   {name:'TARIM Bakanlığı', url:'https://www.tarimorman.gov.tr/Konular/Gida-Ve-Yem-Hizmetleri/Yem-Hizmetleri/Yem-Katki-Maddeleri', desc:'TR Ministry – Feed Additives'},
+  {name:'Vega Group LinkedIn', url:'https://www.linkedin.com/company/vega-group-co-ltd/', desc:'China – Vitamins & Feed Additives'},
+  {name:'NHU LinkedIn', url:'https://www.linkedin.com/company/zhejiang-nhu-co-ltd/', desc:'China – Vitamins manufacturer'},
+  {name:'Freightos', url:'https://www.freightos.com/', desc:'Container freight rates China'},
+  {name:'Xeneta', url:'https://www.xeneta.com/', desc:'Ocean freight benchmarking'},
+  {name:'Sulfur Price', url:'https://www.chemanalyst.com/Pricing-data/sulphur-35', desc:'Sulfur market prices'},
 ];
 
 // ══════════════════════════════════════════
@@ -314,8 +324,9 @@ async function fetchPrice(product) {
     const text = await callClaude(
       `You are a commodity analyst. Search for the current market price of ${product.name} (feed grade) exported from China.
 Query hint: ${product.q}
+Focus ONLY on prices from the last 7 days (June 2026). Do NOT use old data.
 Return ONLY a JSON object (no other text):
-{"price":"range like $X.XX/kg or $XXX-$XXX/MT","trend":"one sentence on recent trend","summary":"2-3 sentences on supply/demand and key 2026 factors"}`
+{"price":"current range like $X.XX/kg or $XXX-$XXX/MT","trend":"one sentence on recent price direction","summary":"2-3 sentences on current market, be specific about June 2026 prices"}`
     );
     const p = parseJSON(text);
     priceData[product.id] = {
@@ -402,11 +413,19 @@ async function fetchNews() {
 
   try {
     const text = await callClaude(
-      `Search for latest 2026 news relevant to a Turkish feed additive manufacturer buying vitamins, amino acids, and minerals from China.
-Topics: Vitamin A/D3/E/C/B-complex/K3 prices, L-Lysine, Threonine, Methionine, DCP, MCP, Choline Chloride, Ferrous/Manganese Sulfate, Soybean Meal.
-Include: Chinese export policy, supply disruptions, price movements, new regulations.
-Return ONLY a JSON array (no other text), max 7 items:
-[{"title":"...","summary":"2 sentences","relevance":"affected products","date":"approx date"}]`
+      `Search for latest news from June 2026 relevant to a Turkish feed additive manufacturer (Birsen Kimya) importing from China.
+
+Search these topics:
+1. Feed vitamin prices: Vitamin A, D3, E 50%, C, B1, B2, B12, K3 - China export prices June 2026
+2. Amino acids: L-Lysine sulfate, L-Threonine, DL-Methionine prices June 2026
+3. Minerals: DCP, MCP, Choline Chloride 60%, Ferrous Sulfate, Manganese Sulfate
+4. Sulfur price and supply June 2026 (affects vitamin/amino acid production)
+5. Container freight rates China to Turkey/Izmir June 2026 (20ft, 40ft FCL)
+6. LinkedIn posts from Vega Group, NHU, BASF, Adisseo, DSM-Firmenich about feed additive prices
+7. Chinese export policies, factory shutdowns, or supply disruptions
+
+Return ONLY a JSON array (no other text), max 10 items, most recent first:
+[{"title":"...","summary":"2 sentences max, include specific prices if found","relevance":"affected products or freight","date":"approx date June 2026"}]`
     );
     const arr = parseJSON(text);
     if (Array.isArray(arr)) { newsData = arr; newsStatus = 'done'; }
@@ -473,7 +492,7 @@ function badgeHTML(status) {
   return `<span class="badge badge-${s}">${labels[s]}</span>`;
 }
 
-const CATS = ['All','Vitamins','Amino Acids','Minerals','Other'];
+const CATS = ['All','Vitamins','Amino Acids','Minerals','Other','Freight'];
 
 function renderPrices() {
   const filtered = activeCat==='All' ? PRODUCTS : PRODUCTS.filter(p=>p.cat===activeCat);
