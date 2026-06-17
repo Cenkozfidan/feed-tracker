@@ -192,7 +192,7 @@
 <div id="app">
   <div id="topbar">
     <div class="logo">Feed Tracker<span>Birsen Kimya Sanayi A.Ş.</span></div>
-    <button class="fetch-all-btn" id="fetchAllBtn" onclick="fetchAll()">⚡ Fetch All</button>
+    <button class="fetch-all-btn" id="fetchAllBtn" onclick="fetchNewsAndReport()">📰 Get News</button>
   </div>
   <div id="tabs">
     <div class="tab active" onclick="switchTab('prices',this)">Prices</div>
@@ -242,6 +242,16 @@ const MOBAOBUY = {
   'Other':       'https://www.mobaobuy.com/siyibuy/indexPage',
   'Freight':     'https://www.freightos.com/freight-resources/china-freight/',
 };
+
+const EFFAMALL_LINKS = {
+  'Vitamins':    'https://www.effamall.com/article?category=Vitamin',
+  'Amino Acids': 'https://www.effamall.com/article?category=Amino+Acid',
+  'Minerals':    'https://www.effamall.com/article?category=Minerals',
+  'Other':       'https://www.effamall.com/article',
+  'Freight':     'https://www.effamall.com/article',
+};
+
+const VEGA_LINK = 'https://www.vegapharma.com/index/china/index.html';
 
 const LINKS = [
   {name:'mobaobuy.com',  url:'https://www.mobaobuy.com',           desc:'China feed raw material market'},
@@ -299,7 +309,7 @@ function load() {
 // ══════════════════════════════════════════
 // API
 // ══════════════════════════════════════════
-async function callClaude(prompt, useSearch=true) {
+async function callClaude(prompt, useSearch=false) {
   const body = {
     model: 'claude-sonnet-4-6',
     max_tokens: 1000,
@@ -349,24 +359,25 @@ Return ONLY a JSON object (no other text):
   render();
 }
 
-async function fetchAll() {
+async function fetchNewsAndReport() {
   if (fetchingAll) return;
   fetchingAll = true;
-  document.getElementById('fetchAllBtn').disabled = true;
-  document.getElementById('fetchAllBtn').textContent = '⏳ Fetching...';
+  const btn = document.getElementById('fetchAllBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Loading...';
   render();
 
-  for (const p of PRODUCTS) {
-    await fetchPrice(p);
-  }
-  // After fetching all, generate daily report
-  await generateReport();
-
+  await fetchNews();
+  
   fetchingAll = false;
-  document.getElementById('fetchAllBtn').disabled = false;
-  document.getElementById('fetchAllBtn').textContent = '⚡ Fetch All';
-  showToast('✅ All prices updated + report ready!');
+  btn.disabled = false;
+  btn.textContent = '📰 Get News';
+  showToast('✅ News updated!');
   render();
+}
+
+async function fetchAll() {
+  fetchNewsAndReport();
 }
 
 async function generateReport() {
@@ -419,21 +430,16 @@ async function fetchNews() {
 
   try {
     const text = await callClaude(
-      `You are a market analyst for a Turkish feed additive manufacturer importing vitamins, amino acids and minerals from China.
+      `Fetch and summarize the latest market reports from these two sources:
+1. https://www.effamall.com/article
+2. https://www.vegapharma.com/index/china/index.html
 
-Search these sources and topics for June 2026 news:
-- https://www.vegapharma.com/index/china/index.html (Vega Daily - daily vitamin & amino acid market report)
-- https://www.effamall.com/article (Effamall daily feed market reports)
-- Feed vitamin prices: Vitamin A, D3, E 50%, C, B-vitamins, K3 from China
-- Amino acids: L-Lysine, L-Threonine, DL-Methionine prices
-- Minerals: DCP, MCP, Choline Chloride, Ferrous Sulfate, Manganese Sulfate, Sulfur
-- Container freight China to Turkey/Izmir (20ft, 40ft FCL rates)
-- News from Vega Group, NHU, BASF, Adisseo about feed additive supply
+Focus on: vitamin prices, amino acid prices, mineral prices, freight rates, supply/demand changes for feed additives exported from China.
 
-Return ONLY valid JSON array, no markdown, no extra text:
-[{"title":"short title","summary":"1-2 sentences with specific data","relevance":"products affected","date":"date"}]
+Return ONLY a valid JSON array, starting with [ and ending with ], no other text:
+[{"title":"short title","summary":"1-2 sentences with specific prices if available","relevance":"products affected","date":"article date"}]
 
-Maximum 10 items. Start with [ and end with ]`
+Maximum 10 items, most recent first.`
     );
     const arr = parseJSON(text);
     if (Array.isArray(arr)) { newsData = arr; newsStatus = 'done'; }
@@ -533,9 +539,10 @@ function renderPrices() {
       ${d.summary && exp ? `<div class="price-summary">${d.summary}</div>` : ''}
       ${d.ts && exp ? `<div class="price-ts">Updated: ${d.ts}</div>` : ''}
       <div class="card-actions">
-        <button class="btn-fetch" ${d.status==='loading'?'disabled':''} onclick="fetchOne('${p.id}')">
-          ${d.status==='loading'?'Fetching…':'Fetch Price'}
-        </button>
+        <a class="btn-fetch" href="${EFFAMALL_LINKS[p.cat]||'https://www.effamall.com/article'}" target="_blank" style="text-decoration:none;display:flex;align-items:center;justify-content:center;flex:1">
+          Effamall ↗
+        </a>
+        <a class="btn-link" href="${VEGA_LINK}" target="_blank">Vega ↗</a>
         <a class="btn-link" href="${mbLink}" target="_blank">MB ↗</a>
       </div>
     </div>`;
@@ -544,7 +551,7 @@ function renderPrices() {
   return `
     <div class="schedule-banner">
       <div class="schedule-dot"></div>
-      <div class="schedule-txt"><strong>Auto-fetch at 06:00</strong> · Next run in ${hh}h ${mm}m</div>
+      <div class="schedule-txt"><strong>Tap 📰 Get News</strong> for daily market update from Effamall & Vega · <strong>Auto at 06:00</strong> · Next in ${hh}h ${mm}m</div>
     </div>
     <div class="cat-pills">${pills}</div>
     ${cards}`;
